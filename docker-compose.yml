@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  todo-api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - todo-mongodb
+    volumes:
+      - .:/app
+    command: npm run dev
+
+  todo-mongodb:
+    image: mongo
+    ports:
+     - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
